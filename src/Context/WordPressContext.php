@@ -139,7 +139,8 @@ class WordPressContext extends MinkContext
     public function iAmLoggedOut()
     {
         $this->visit(wp_logout_url());
-        $this->getSession()->getPage()->clickLink('log out');
+        if ($this->getSession()->getPage()->hasLink('log out')) {
+            $this->getSession()->getPage()->clickLink('log out');
+        }
     }
-
 }
