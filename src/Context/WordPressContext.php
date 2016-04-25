@@ -132,8 +132,12 @@ class WordPressContext extends MinkContext
     {
         $this->visit(get_site_url()."/wp-admin/options-permalink.php");
         $currentPage = $this->getSession()->getPage();
-        $currentPage->fillField('selection', '/%postname%/');
-        $currentPage->pressButton('Save Changes');
+        if ($currentPage->findField('selection')) {
+            $currentPage->fillField('selection', '/%postname%/');
+        }
+        if ($currentPage->findButton('Save Changes')) {
+            $currentPage->pressButton('Save Changes');
+        }
     }
 
     /**
